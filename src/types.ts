@@ -16,6 +16,12 @@ export interface IList {
   totalPrice: number;
 }
 
+export interface INewList {
+  name: string;
+  pending: boolean;
+  display: boolean;
+}
+
 export interface IFilters {
   tags: string[];
 }
@@ -36,6 +42,7 @@ export interface IListItemForm {
 export interface IMain {
   lists: IList[];
   pending: boolean;
+  newList: INewList;
 }
 
 export interface IState {

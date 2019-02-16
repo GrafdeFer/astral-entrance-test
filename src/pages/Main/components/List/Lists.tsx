@@ -2,18 +2,28 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { IList } from "src/types";
 
-const List: React.FunctionComponent<IList> = ({ items, name, id }) => {
-  const purchasedCount = () => {
-    return items.filter(item => item.purchased).length;
+interface IListProps extends IList {
+  deleteList: (id: string) => void;
+}
+
+const List: React.FunctionComponent<IListProps> = props => {
+  const { items, name, id, deleteList } = props;
+
+  const purchasedCount = items.filter(item => item.purchased).length;
+
+  const onDeleteList = (deleteID: string) => (ev: React.MouseEvent) => {
+    deleteList(deleteID);
   };
 
   const totalCount = items.length;
   return (
-    <Link to={`/list/${id}`}>
-      <div>{name}</div>
-      <div>товаров: {totalCount}</div>
-      <div>{`${purchasedCount()}/${totalCount}`}</div>
-    </Link>
+    <React.Fragment>
+      <Link to={`/list/${id}`}>
+        <div>{name}</div>
+        <div>{`${purchasedCount}/${totalCount}`}</div>
+      </Link>
+      <button onClick={onDeleteList(id)}>delete</button>
+    </React.Fragment>
   );
 };
 
