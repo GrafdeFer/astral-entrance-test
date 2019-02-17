@@ -7,3 +7,7 @@
 :local(.newItemForm > div) {
   margin-right: 5px;
 }
+
+:local(.newItemForm > button) {
+  padding: 6px 20px;
+}

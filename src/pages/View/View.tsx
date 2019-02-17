@@ -70,6 +70,7 @@ const View: React.FunctionComponent<IViewProps> = props => {
             addTag={addTag}
             removeTag={removeTag}
             tags={tags}
+            items={items}
             listID={listID}
           />
         </div>
