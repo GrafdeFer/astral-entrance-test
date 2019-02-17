@@ -5,6 +5,7 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import ListItem from "./components/ListItem/ListItem";
 import NewItemForm from "./components/NewItemForm";
+import Sidebar from "./components/Sidebar";
 import { IViewDispatchProps, IViewStateProps } from "./types";
 import * as styles from "./View.css";
 
@@ -29,20 +30,10 @@ const View: React.FunctionComponent<IViewProps> = props => {
   } = props;
   const list = lists[listID];
 
-  const onAddTag = (tag: string) => (ev: React.MouseEvent) => {
-    const { addTag } = props;
-    addTag(listID, tag);
-  };
-
-  // const onRemoveTag = (tag: string) => (ev: React.MouseEvent) => {
-  //   const { removeTag } = props;
-  //   removeTag(listID, tag);
-  // };
-
   if (lists.hasOwnProperty(listID)) {
-    const { removeItem, togglePurchaseItem } = props;
+    const { removeItem, togglePurchaseItem, addTag, removeTag } = props;
+    const { items, tags } = list;
     const listItems = () => {
-      const { items } = list;
       return items.map(item => (
         <ListItem
           key={item.id}
@@ -75,9 +66,12 @@ const View: React.FunctionComponent<IViewProps> = props => {
             />
             <div>{listItems()}</div>
           </div>
-          <div>
-            <button onClick={onAddTag("kek")}>kek</button>
-          </div>
+          <Sidebar
+            addTag={addTag}
+            removeTag={removeTag}
+            tags={tags}
+            listID={listID}
+          />
         </div>
       </React.Fragment>
     );

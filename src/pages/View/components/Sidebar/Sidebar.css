@@ -1,0 +1,14 @@
+:local(.sidebar) {
+  width: 35%;
+  margin: 10px 10px 10px 0;
+  padding: 10px;
+}
+
+:local(.tags) {
+  margin-bottom: 10px;
+}
+
+:local(.tags > div) {
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
