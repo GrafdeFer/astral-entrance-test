@@ -1,46 +1,53 @@
-import { Dispatch } from "redux";
-import actions from "./constants";
+import { listActions } from "src/constants/index";
+import { IListItem } from "src/types";
+import { viewActions } from "./constants";
 
-export const addTag = (tag: string) => async (dispatch: Dispatch) => {
-  dispatch(addTagRequest());
-  try {
-    dispatch(addTagSuccess(tag));
-  } catch (err) {
-    dispatch(addTagFailure());
-  }
-};
-
-const addTagRequest = () => ({
-  type: actions.ADD_TAG_REQUEST
-});
-
-const addTagSuccess = (tag: string) => ({
-  type: actions.ADD_TAG_SUCCESS,
+export const addTag = (listID: string, tag: string) => ({
+  type: listActions.ADD_TAG,
+  listID,
   tag
 });
 
-const addTagFailure = () => ({
-  type: actions.ADD_TAG_FAILURE
-});
-
-export const deleteTag = (tag: string) => async (dispatch: Dispatch) => {
-  dispatch(deleteTagRequest());
-  try {
-    dispatch(deleteTagSuccess(tag));
-  } catch (err) {
-    dispatch(deleteTagFailure());
-  }
-};
-
-const deleteTagRequest = () => ({
-  type: actions.DELETE_TAG_REQUEST
-});
-
-const deleteTagSuccess = (tag: string) => ({
-  type: actions.DELETE_TAG_SUCCESS,
+export const removeTag = (listID: string, tag: string) => ({
+  type: listActions.REMOVE_TAG,
+  listID,
   tag
 });
 
-const deleteTagFailure = () => ({
-  type: actions.DELETE_TAG_FAILURE
+export const addItem = (listID: string, item: IListItem) => ({
+  type: listActions.ADD_ITEM,
+  listID,
+  item
+});
+
+export const removeItem = (listID: string, itemID: string) => ({
+  type: listActions.ADD_ITEM,
+  listID,
+  itemID
+});
+
+export const removeList = (listID: string) => ({
+  type: listActions.ADD_ITEM,
+  listID
+});
+
+export const togglePurchaseItem = (listID: string, itemID: string) => ({
+  type: listActions.TOGGLE_PURCHASE_ITEM,
+  listID,
+  itemID
+});
+
+export const changeItemName = (name: string) => ({
+  type: viewActions.CHANGE_ITEM_NAME,
+  name
+});
+
+export const changeItemCount = (count: number) => ({
+  type: viewActions.CHANGE_ITEM_COUNT,
+  count
+});
+
+export const changeItemPrice = (price: number) => ({
+  type: viewActions.CHANGE_ITEM_PRICE,
+  price
 });

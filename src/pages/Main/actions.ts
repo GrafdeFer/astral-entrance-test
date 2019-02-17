@@ -1,29 +1,24 @@
 import { Dispatch } from "redux";
 import { fakeCreateList } from "src/api";
+import { listActions } from "src/constants/index";
 import { IList } from "src/types";
 import actions from "./constants";
 
 export const createList = (name: string) => async (dispatch: Dispatch) => {
-  dispatch(createListRequest());
   try {
+    const listID = new Date().toISOString();
     const list = await fakeCreateList(name);
-    dispatch(createListSuccess(list));
+    dispatch(createListSuccess(listID, list));
+    dispatch(resetForm());
   } catch (err) {
-    dispatch(createListFailure());
+    // ??
   }
 };
 
-const createListRequest = () => ({
-  type: actions.CREATE_LIST_REQUEST
-});
-
-const createListSuccess = (list: IList) => ({
-  type: actions.CREATE_LIST_SUCCESS,
+const createListSuccess = (listID: string, list: IList) => ({
+  type: listActions.ADD_LIST,
+  listID,
   list
-});
-
-const createListFailure = () => ({
-  type: actions.CREATE_LIST_FAILURE
 });
 
 export const changeName = (name: string) => ({
@@ -37,26 +32,4 @@ export const openForm = () => ({
 
 export const resetForm = () => ({
   type: actions.RESET_NEW_LIST_FORM
-});
-
-export const deleteList = (id: string) => async (dispatch: Dispatch) => {
-  dispatch(deleteListRequest());
-  try {
-    dispatch(deleteListSuccess(id));
-  } catch (err) {
-    dispatch(deleteListFailure());
-  }
-};
-
-const deleteListRequest = () => ({
-  type: actions.DELETE_LIST_REQUEST
-});
-
-const deleteListSuccess = (id: string) => ({
-  type: actions.DELETE_LIST_SUCCESS,
-  id
-});
-
-const deleteListFailure = () => ({
-  type: actions.DELETE_LIST_FAILURE
 });

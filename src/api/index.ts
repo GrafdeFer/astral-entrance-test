@@ -7,7 +7,7 @@ export const fakeCreateList = (name: string): IList => {
     id: created,
     items: [],
     created,
-    name,
+    name: name !== "" ? name : "Новый список",
     tags: [],
     totalPrice: 0
   };

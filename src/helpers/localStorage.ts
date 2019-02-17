@@ -1,8 +1,6 @@
-// import { IMain } from "src/types";
-
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("state");
+    const serializedState = localStorage.getItem("lists");
     if (serializedState === null) {
       return undefined;
     }
@@ -12,10 +10,10 @@ export const loadState = () => {
   }
 };
 
-export const saveState = (state: any) => {
+export const saveState = (main: any) => {
   try {
-    const serializedState = JSON.stringify(state);
-    localStorage.setItem("state", serializedState);
+    const serializedState = JSON.stringify(main);
+    localStorage.setItem("lists", serializedState);
   } catch (err) {
     // TODO: add handler
   }

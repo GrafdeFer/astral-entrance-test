@@ -2,19 +2,12 @@ import { connect } from "react-redux";
 import { Action } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { IState } from "src/types";
-import {
-  changeName,
-  createList,
-  deleteList,
-  openForm,
-  resetForm
-} from "./actions";
+import { changeName, createList, openForm, resetForm } from "./actions";
 import Main from "./Main";
 import { IMainDispatchProps, IMainStateProps } from "./types";
 
 const mapState2Props = (state: IState) => ({
-  lists: state.main.lists,
-  pending: state.main.pending,
+  lists: state.lists.lists,
   newList: state.main.newList
 });
 
@@ -24,8 +17,7 @@ const mapDispatch2Props = (
   createList: (name: string) => dispatch(createList(name)),
   changeName: (name: string) => dispatch(changeName(name)),
   openForm: () => dispatch(openForm()),
-  resetForm: () => dispatch(resetForm()),
-  deleteList: (id: string) => dispatch(deleteList(id))
+  resetForm: () => dispatch(resetForm())
 });
 
 export default connect<IMainStateProps, IMainDispatchProps, null>(

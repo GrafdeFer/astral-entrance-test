@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 import App from "./App";
 import { loadState, saveState } from "./helpers/localStorage";
 import "./index.css";
-import reducer from "./reducer";
+import reducer from "./reducers/reducer";
 
 const composeEnhancer =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -21,7 +21,7 @@ const store = createStore(
 
 store.subscribe(() => {
   saveState({
-    main: store.getState().main
+    lists: store.getState().lists
   });
 });
 

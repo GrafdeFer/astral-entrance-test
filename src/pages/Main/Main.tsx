@@ -1,36 +1,40 @@
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import List from "./components/List";
 import NewListForm from "./components/NewListForm";
+import * as styles from "./Main.css";
 import { IMainDispatchProps, IMainStateProps } from "./types";
 
 interface IMainProps extends IMainStateProps, IMainDispatchProps {}
 
 const Main: React.FunctionComponent<IMainProps> = props => {
-  const { newList, changeName, openForm, resetForm } = props;
-
+  const { newList, changeName, openForm, resetForm, createList } = props;
   const renderLists = () => {
-    const { lists, deleteList } = props;
-    return lists.map(list => (
-      <List key={list.id} {...list} deleteList={deleteList} />
-    ));
+    const { lists } = props;
+    return Object.keys(lists).map(key => <List key={key} {...lists[key]} />);
   };
 
-  const onCreateList = (name: string) => (ev: React.MouseEvent) => {
-    const { createList } = props;
-    createList(name);
-  };
   return (
     <React.Fragment>
-      <h2>Мои списки</h2>
-      {newList.display && (
-        <React.Fragment>
-          <NewListForm changeName={changeName} {...newList} />
-          <button onClick={resetForm}>Отмена</button>
-          <button onClick={onCreateList(newList.name)}>Сохранить</button>
-        </React.Fragment>
-      )}
-      {!newList.display && <button onClick={openForm}>Добавить</button>}
-      {renderLists()}
+      <AppBar position="static" color="primary">
+        <Toolbar>
+          <Typography variant="h6" color="inherit">
+            Мои списки
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className={styles.mainContent}>
+        <NewListForm
+          {...newList}
+          changeName={changeName}
+          openForm={openForm}
+          resetForm={resetForm}
+          createList={createList}
+        />
+        {renderLists()}
+      </div>
     </React.Fragment>
   );
 };

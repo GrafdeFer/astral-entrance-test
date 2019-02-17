@@ -1,0 +1,8 @@
+:local(.viewContent) {
+  display: flex;
+}
+
+:local(.items) {
+  flex: 1;
+  padding: 10px;
+}

@@ -1,8 +1,7 @@
-import { IList, INewList } from "src/types";
+import { ILists, INewList } from "src/types";
 
 export interface IMainStateProps {
-  lists: IList[];
-  pending: boolean;
+  lists: ILists;
   newList: INewList;
 }
 
@@ -11,5 +10,4 @@ export interface IMainDispatchProps {
   changeName: (name: string) => void;
   openForm: () => void;
   resetForm: () => void;
-  deleteList: (id: string) => void;
 }

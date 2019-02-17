@@ -1,0 +1,20 @@
+:local(.listItem) {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+}
+
+:local(.listItem > h6) {
+  flex: 1;
+  text-transform: capitalize;
+}
+
+:local(.info) {
+  width: 25%;
+}
+
+:local(.info > p) {
+  margin-left: 5px;
+}

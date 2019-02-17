@@ -1,0 +1,32 @@
+:local(.link) {
+  text-decoration: none;
+  color: #222;
+}
+
+:local(.list:hover) {
+  background-color: aquamarine;
+  transition: 0.4s;
+}
+
+:local(.list) {
+  padding: 10px;
+  transition: 0.4s;
+  margin-top: 10px;
+}
+
+:local(.info) {
+  display: flex;
+  align-items: center;
+}
+
+:local(.info > h6) {
+  flex: 1;
+}
+
+:local(.tags) {
+  display: flex;
+}
+
+:local(.tags > div) {
+  margin-right: 5px;
+}

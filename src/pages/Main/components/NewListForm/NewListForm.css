@@ -1,0 +1,24 @@
+:local(.newListForm) {
+  margin-top: 10px;
+  display: flex;
+  align-items: baseline;
+  padding: 10px;
+}
+
+:local(.newListForm > button) {
+  margin-left: 10px;
+}
+
+:local(.visible) {
+  flex: 1;
+  transition: all 400ms ease-in;
+  margin-right: 10px;
+}
+
+:local(.hidden) {
+  flex: 1;
+  margin-right: -10px !important;
+  -webkit-transform: translateX(-106%);
+  transform: translateX(-106%);
+  transition: all 400ms ease-out;
+}
