@@ -45,6 +45,12 @@ export interface IMain {
   newList: INewList;
 }
 
+export interface IView {
+  list: IList;
+  pending: boolean;
+}
+
 export interface IState {
   main: IMain;
+  view: IView;
 }

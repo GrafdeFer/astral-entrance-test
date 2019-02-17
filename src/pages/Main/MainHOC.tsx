@@ -6,7 +6,6 @@ import {
   changeName,
   createList,
   deleteList,
-  getLists,
   openForm,
   resetForm
 } from "./actions";
@@ -22,7 +21,6 @@ const mapState2Props = (state: IState) => ({
 const mapDispatch2Props = (
   dispatch: ThunkDispatch<IState, void, Action<string>>
 ) => ({
-  getLists: () => dispatch(getLists()),
   createList: (name: string) => dispatch(createList(name)),
   changeName: (name: string) => dispatch(changeName(name)),
   openForm: () => dispatch(openForm()),

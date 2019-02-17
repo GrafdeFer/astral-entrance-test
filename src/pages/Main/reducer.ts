@@ -14,16 +14,6 @@ const initialState: IMain = {
 // TODO: to add action types
 export default function mainReducer(state = initialState, action: any) {
   switch (action.type) {
-    case actions.GET_LISTS_REQUEST:
-      return {
-        ...state,
-        pending: true
-      };
-    case actions.GET_LISTS_SUCCESS:
-      return {
-        ...state,
-        lists: action.lists
-      };
     case actions.CHANGE_NEW_LIST_NAME:
       return {
         ...state,

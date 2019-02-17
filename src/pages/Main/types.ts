@@ -7,7 +7,6 @@ export interface IMainStateProps {
 }
 
 export interface IMainDispatchProps {
-  getLists: () => void;
   createList: (name: string) => void;
   changeName: (name: string) => void;
   openForm: () => void;

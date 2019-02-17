@@ -5,13 +5,25 @@ import { HashRouter } from "react-router-dom";
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 import App from "./App";
+import { loadState, saveState } from "./helpers/localStorage";
 import "./index.css";
 import reducer from "./reducer";
 
 const composeEnhancer =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, composeEnhancer(applyMiddleware(thunk)));
+const persistedState = loadState();
+const store = createStore(
+  reducer,
+  persistedState,
+  composeEnhancer(applyMiddleware(thunk))
+);
+
+store.subscribe(() => {
+  saveState({
+    main: store.getState().main
+  });
+});
 
 ReactDOM.render(
   <Provider store={store}>

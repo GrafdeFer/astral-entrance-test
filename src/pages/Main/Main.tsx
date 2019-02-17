@@ -5,39 +5,34 @@ import { IMainDispatchProps, IMainStateProps } from "./types";
 
 interface IMainProps extends IMainStateProps, IMainDispatchProps {}
 
-export default class Main extends React.Component<IMainProps, any> {
-  public componentDidMount = () => {
-    const { getLists } = this.props;
-    getLists();
-  };
+const Main: React.FunctionComponent<IMainProps> = props => {
+  const { newList, changeName, openForm, resetForm } = props;
 
-  public renderLists = () => {
-    const { lists, deleteList } = this.props;
+  const renderLists = () => {
+    const { lists, deleteList } = props;
     return lists.map(list => (
       <List key={list.id} {...list} deleteList={deleteList} />
     ));
   };
 
-  public onCreateList = (name: string) => (ev: React.MouseEvent) => {
-    const { createList } = this.props;
+  const onCreateList = (name: string) => (ev: React.MouseEvent) => {
+    const { createList } = props;
     createList(name);
   };
+  return (
+    <React.Fragment>
+      <h2>Мои списки</h2>
+      {newList.display && (
+        <React.Fragment>
+          <NewListForm changeName={changeName} {...newList} />
+          <button onClick={resetForm}>Отмена</button>
+          <button onClick={onCreateList(newList.name)}>Сохранить</button>
+        </React.Fragment>
+      )}
+      {!newList.display && <button onClick={openForm}>Добавить</button>}
+      {renderLists()}
+    </React.Fragment>
+  );
+};
 
-  public render() {
-    const { newList, changeName, openForm, resetForm } = this.props;
-    return (
-      <React.Fragment>
-        {newList.display && (
-          <React.Fragment>
-            <NewListForm changeName={changeName} {...newList} />
-            <button onClick={resetForm}>Отмена</button>
-            <button onClick={this.onCreateList(newList.name)}>Сохранить</button>
-          </React.Fragment>
-        )}
-        {!newList.display && <button onClick={openForm}>Добавить</button>}
-        <h2>Мои списки</h2>
-        {this.renderLists()}
-      </React.Fragment>
-    );
-  }
-}
+export default Main;
