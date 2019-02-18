@@ -1,3 +1,3 @@
-import NewItemForm from "./NewItemForm";
+import NewItemFormHOC from "./NewItemFormHOC";
 
-export default NewItemForm;
+export default NewItemFormHOC;

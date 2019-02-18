@@ -1,3 +1,3 @@
-import Sidebar from "./Sidebar";
+import SidebarHOC from "./SidebarHOC";
 
-export default Sidebar;
+export default SidebarHOC;

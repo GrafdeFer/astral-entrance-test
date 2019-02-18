@@ -2,19 +2,22 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import * as React from "react";
-import { IListItem, INewItem } from "src/types";
+import { IListItem } from "src/types";
 import * as styles from "./NewItemForm.css";
+import {
+  INewItemFormDispatchProps,
+  INewItemFormProps,
+  INewItemFormStateProps
+} from "./types";
 
-interface INewItemFormProps extends INewItem {
-  listID: string;
-  changeItemName: (name: string) => void;
-  changeItemCount: (count: number) => void;
-  changeItemPrice: (price: number) => void;
-  addItem: (listID: string, item: IListItem) => void;
-}
+interface INewItemFormPropses
+  extends INewItemFormProps,
+    INewItemFormStateProps,
+    INewItemFormDispatchProps {}
 
-const NewItemForm: React.FunctionComponent<INewItemFormProps> = props => {
-  const { name, price, count, listID } = props;
+const NewItemForm: React.FunctionComponent<INewItemFormPropses> = props => {
+  const { listID } = props;
+  const { name, price, count } = props.newItem;
 
   const onChangeItemName = (ev: React.ChangeEvent<HTMLInputElement>) => {
     const newName = ev.currentTarget.value;
