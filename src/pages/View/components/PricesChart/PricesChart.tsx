@@ -1,27 +1,7 @@
 import * as React from "react";
 import { PieChart } from "react-easy-chart";
 import { IListItem } from "src/types";
-// import * as styles from "./PricesChart.css";
-
-// const PricesChart: React.FunctionComponent<IPricesChartProps> = ({ items }) => {
-
-//   return (
-//     <PieChart
-//       size={300}
-//       labels={true}
-//       data={data}
-//       styles={{
-//         ".chart_text": {
-//           color: "white",
-//           fontSize: "1em",
-//           fill: "#fff"
-//         }
-//       }}
-//     />
-//   );
-// };
-
-// export default PricesChart;
+import * as styles from "./PricesChart.css";
 
 interface IPricesChartProps {
   items: IListItem[];
@@ -51,8 +31,6 @@ export default class PricesChart extends React.Component<
   }
 
   public onMouseOver = (d: any, e: any) => {
-    // tslint:disable-next-line: no-console
-    console.log(e.x, e.y);
     this.setState({
       showToolTip: true,
       top: e.y,
@@ -71,7 +49,11 @@ export default class PricesChart extends React.Component<
       const { top, left, key, value } = this.state;
       return (
         <div
-          style={{ position: "absolute", top: `${top}px`, left: `${left}px` }}
+          style={{
+            position: "absolute",
+            top: `${top + 10}px`,
+            left: `${left + 10}px`
+          }}
         >
           {`${key}: ${value}`}
         </div>
@@ -89,7 +71,7 @@ export default class PricesChart extends React.Component<
     }));
 
     return (
-      <div>
+      <div className={styles.chart}>
         {this.createTooltip()}
         <PieChart
           size={300}
