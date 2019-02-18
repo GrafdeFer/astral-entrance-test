@@ -3,6 +3,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { IList } from "src/types";
+import Filters from "./components/Filters";
 import ListItem from "./components/ListItem/ListItem";
 import NewItemForm from "./components/NewItemForm";
 import Sidebar from "./components/Sidebar";
@@ -19,36 +21,68 @@ export interface IViewProps
     RouteComponentProps<IMatchParams> {}
 
 export interface IViewState {
-  filter: "purchased" | "no";
+  notPurchased: boolean;
+  search: string;
 }
 
 export default class View extends React.Component<IViewProps, IViewState> {
   constructor(props: IViewProps) {
     super(props);
     this.state = {
-      filter: "no"
+      notPurchased: false,
+      search: ""
     };
   }
 
+  public onFilterPurchased = () => {
+    this.setState({
+      notPurchased: !this.state.notPurchased
+    });
+  };
+
+  public onSearchItem = (search: string) => {
+    this.setState({
+      search
+    });
+  };
+
+  public matchSearch = (value: string) => {
+    const { search } = this.state;
+    return value.toLowerCase().search(search.toLowerCase()) !== -1;
+  };
+
+  public listItems = (list: IList, listID: string) => {
+    const { removeItem, togglePurchaseItem } = this.props;
+    const { notPurchased } = this.state;
+
+    return list.items.map(item => {
+      const listItem = (
+        <ListItem
+          {...item}
+          key={item.id}
+          listID={listID}
+          removeItem={removeItem}
+          togglePurchaseItem={togglePurchaseItem}
+        />
+      );
+      if (notPurchased) {
+        return (
+          !item.purchased === notPurchased &&
+          this.matchSearch(item.name) &&
+          listItem
+        );
+      }
+      return this.matchSearch(item.name) && listItem;
+    });
+  };
+
   public render() {
     const { lists } = this.props;
+    const { search, notPurchased } = this.state;
     const listID = this.props.match.params.id;
     const list = lists[listID];
 
     if (lists.hasOwnProperty(listID)) {
-      const { removeItem, togglePurchaseItem } = this.props;
-      const { items, tags } = list;
-
-      const listItems = items.map(item => (
-        <ListItem
-          key={item.id}
-          listID={listID}
-          {...item}
-          removeItem={removeItem}
-          togglePurchaseItem={togglePurchaseItem}
-        />
-      ));
-
       return (
         <React.Fragment>
           <AppBar position="static" color="primary">
@@ -61,9 +95,15 @@ export default class View extends React.Component<IViewProps, IViewState> {
           <div className={styles.viewContent}>
             <div className={styles.items}>
               <NewItemForm listID={listID} />
-              <div>{listItems}</div>
+              <Filters
+                search={search}
+                notPurchased={notPurchased}
+                filterPurchased={this.onFilterPurchased}
+                searchItem={this.onSearchItem}
+              />
+              {this.listItems(list, listID)}
             </div>
-            <Sidebar tags={tags} items={items} listID={listID} />
+            <Sidebar tags={list.tags} items={list.items} listID={listID} />
           </div>
         </React.Fragment>
       );

@@ -79,7 +79,7 @@ export default class PricesChart extends React.Component<
       <React.Fragment>
         {this.createTooltip()}
         <Typography variant="caption" gutterBottom={true}>
-          Красивая (вроде) диаграмка:
+          Красивая (вроде) диаграммка:
         </Typography>
         <div className={styles.chart}>
           <PieChart
