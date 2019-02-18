@@ -4,9 +4,9 @@ import { listActions } from "src/constants/index";
 import { IList } from "src/types";
 import actions from "./constants";
 
-export const createList = (name: string) => async (dispatch: Dispatch) => {
-  const listID = await new Date().toISOString();
-  const list = await fakeCreateList(name);
+export const createList = (name: string) => (dispatch: Dispatch) => {
+  const listID = new Date().toISOString();
+  const list = fakeCreateList(name);
   dispatch(createListSuccess(listID, list));
   dispatch(resetForm());
 };
