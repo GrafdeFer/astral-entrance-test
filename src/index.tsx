@@ -1,3 +1,4 @@
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -8,6 +9,20 @@ import App from "./App";
 import { loadState, saveState } from "./helpers/localStorage";
 import "./index.css";
 import reducer from "./reducers/reducer";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#5c6bc0"
+    },
+    secondary: {
+      main: "#aed581"
+    }
+  },
+  typography: {
+    useNextVariants: true
+  }
+});
 
 const composeEnhancer =
   (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -28,7 +43,9 @@ store.subscribe(() => {
 ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </HashRouter>
   </Provider>,
   document.getElementById("root") as HTMLElement

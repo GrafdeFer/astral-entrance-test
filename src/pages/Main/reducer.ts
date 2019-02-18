@@ -1,7 +1,7 @@
-import { IMain } from "src/types";
+import { IMainReducer } from "src/types";
 import actions from "./constants";
 
-const initialState: IMain = {
+const initialState: IMainReducer = {
   newList: {
     name: "",
     display: false

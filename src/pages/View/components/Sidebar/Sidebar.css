@@ -1,6 +1,7 @@
 :local(.sidebar) {
   width: 35%;
   min-width: 350px;
+  max-width: 450px;
   padding: 10px 10px 10px 0;
 }
 

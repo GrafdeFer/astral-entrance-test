@@ -17,6 +17,7 @@ interface ISidebarProps {
 
 const Sidebar: React.FunctionComponent<ISidebarProps> = props => {
   const { tags, removeTag, listID, addTag, items } = props;
+
   const onRemoveTag = (tag: string) => (ev: React.MouseEvent) => {
     removeTag(listID, tag);
   };

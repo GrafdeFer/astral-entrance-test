@@ -15,11 +15,6 @@ export default function listsReducer(state = initialState, action: any) {
           [action.listID]: action.list
         }
       };
-    case listActions.REMOVE_LIST:
-      return {
-        ...state,
-        lists: Object.keys(state.lists).filter((id: string) => id !== action.id)
-      };
     case listActions.ADD_TAG:
       return {
         ...state,

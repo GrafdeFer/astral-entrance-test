@@ -42,12 +42,11 @@ export interface IListItemForm {
   items: IListItem[];
 }
 
-export interface IMain {
+export interface IMainReducer {
   newList: INewList;
 }
 
-export interface IView {
-  list: IList;
+export interface IViewReducer {
   newItem: INewItem;
 }
 
@@ -62,7 +61,7 @@ export interface INewItem {
 }
 
 export interface IState {
-  main: IMain;
-  view: IView;
+  main: IMainReducer;
+  view: IViewReducer;
   lists: IListsReducer;
 }

@@ -1,7 +1,8 @@
 import { listActions } from "src/constants/index";
+import { IViewReducer } from "src/types";
 import { viewActions } from "./constants";
 
-const initialState = {
+const initialState: IViewReducer = {
   newItem: {
     name: "",
     count: 1,

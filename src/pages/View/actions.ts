@@ -21,14 +21,9 @@ export const addItem = (listID: string, item: IListItem) => ({
 });
 
 export const removeItem = (listID: string, itemID: string) => ({
-  type: listActions.ADD_ITEM,
+  type: listActions.REMOVE_ITEM,
   listID,
   itemID
-});
-
-export const removeList = (listID: string) => ({
-  type: listActions.ADD_ITEM,
-  listID
 });
 
 export const togglePurchaseItem = (listID: string, itemID: string) => ({

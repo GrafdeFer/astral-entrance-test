@@ -5,10 +5,10 @@ import * as React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { IList } from "src/types";
 import Filters from "./components/Filters";
-import ListItem from "./components/ListItem/ListItem";
+import ListItem from "./components/ListItem/";
 import NewItemForm from "./components/NewItemForm";
 import Sidebar from "./components/Sidebar";
-import { IViewDispatchProps, IViewStateProps } from "./types";
+import { IViewStateProps } from "./types";
 import * as styles from "./View.css";
 
 interface IMatchParams {
@@ -17,7 +17,6 @@ interface IMatchParams {
 
 export interface IViewProps
   extends IViewStateProps,
-    IViewDispatchProps,
     RouteComponentProps<IMatchParams> {}
 
 export interface IViewState {
@@ -52,19 +51,9 @@ export default class View extends React.Component<IViewProps, IViewState> {
   };
 
   public listItems = (list: IList, listID: string) => {
-    const { removeItem, togglePurchaseItem } = this.props;
     const { notPurchased } = this.state;
-
     return list.items.map(item => {
-      const listItem = (
-        <ListItem
-          {...item}
-          key={item.id}
-          listID={listID}
-          removeItem={removeItem}
-          togglePurchaseItem={togglePurchaseItem}
-        />
-      );
+      const listItem = <ListItem list={item} key={item.id} listID={listID} />;
       if (notPurchased) {
         return (
           !item.purchased === notPurchased &&
@@ -109,9 +98,11 @@ export default class View extends React.Component<IViewProps, IViewState> {
       );
     }
     return (
-      <div>
-        <h1>404</h1>
-      </div>
+      <React.Fragment>
+        <Typography variant="h2" color="secondary" className={styles.empty}>
+          Нет такого списка!
+        </Typography>
+      </React.Fragment>
     );
   }
 }

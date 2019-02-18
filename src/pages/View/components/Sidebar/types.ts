@@ -9,5 +9,4 @@ export interface IViewStateProps {
 export interface IViewDispatchProps {
   addTag: (listID: string, tag: string) => void;
   removeTag: (listID: string, tag: string) => void;
-  removeList: (listID: string) => void;
 }

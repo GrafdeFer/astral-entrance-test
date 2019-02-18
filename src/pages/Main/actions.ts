@@ -5,14 +5,10 @@ import { IList } from "src/types";
 import actions from "./constants";
 
 export const createList = (name: string) => async (dispatch: Dispatch) => {
-  try {
-    const listID = new Date().toISOString();
-    const list = await fakeCreateList(name);
-    dispatch(createListSuccess(listID, list));
-    dispatch(resetForm());
-  } catch (err) {
-    // ??
-  }
+  const listID = await new Date().toISOString();
+  const list = await fakeCreateList(name);
+  dispatch(createListSuccess(listID, list));
+  dispatch(resetForm());
 };
 
 const createListSuccess = (listID: string, list: IList) => ({

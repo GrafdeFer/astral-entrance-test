@@ -54,13 +54,13 @@ export default class PricesChart extends React.Component<
         <div
           className={styles.tooltip}
           style={{
-            top: `${top + 10}px`,
+            top: `${top - 20}px`,
             left: `${left + 10}px`
           }}
         >
-          <Typography variant="caption">{`${key} - ${moneyFormat(
+          <Typography variant="caption">{`${key}(${moneyFormat(
             value
-          )}`}</Typography>
+          )})`}</Typography>
         </div>
       );
     }
@@ -70,10 +70,21 @@ export default class PricesChart extends React.Component<
   public render() {
     const { items } = this.props;
 
-    const data = items.map(item => ({
-      key: item.name,
-      value: item.price === 0 ? 1 : item.price
-    }));
+    const data = () => {
+      if (items.length !== 0) {
+        return items.map(item => ({
+          key: item.name,
+          value: item.price === 0 ? 1 : item.price
+        }));
+      } else {
+        return [
+          {
+            key: "Купите хоть что-нибудь...",
+            value: 0.1
+          }
+        ];
+      }
+    };
 
     return (
       <React.Fragment>
@@ -84,7 +95,7 @@ export default class PricesChart extends React.Component<
         <div className={styles.chart}>
           <PieChart
             size={300}
-            data={data}
+            data={data()}
             mouseOverHandler={this.onMouseOver}
             mouseOutHandler={this.onMouseOut}
           />
