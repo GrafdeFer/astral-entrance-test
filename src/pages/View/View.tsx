@@ -33,6 +33,7 @@ const View: React.FunctionComponent<IViewProps> = props => {
   if (lists.hasOwnProperty(listID)) {
     const { removeItem, togglePurchaseItem, addTag, removeTag } = props;
     const { items, tags } = list;
+
     const listItems = () => {
       return items.map(item => (
         <ListItem

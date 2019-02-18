@@ -2,6 +2,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import * as React from "react";
+import { moneyFormat } from "src/helpers/moneyFormatter";
 import { IListItem } from "src/types";
 import * as styles from "./ListItem.css";
 
@@ -22,7 +23,9 @@ const ListItem: React.FunctionComponent<IListItemProps> = props => {
       <Typography variant="subtitle1">{props.name}</Typography>
       <div className={styles.info}>
         <Typography variant="caption">Количество: {props.count}</Typography>
-        <Typography variant="caption">Цена: {props.price}</Typography>
+        <Typography variant="caption">
+          Цена: {moneyFormat(props.price)}
+        </Typography>
       </div>
       <Checkbox checked={props.purchased} onChange={onTogglePurchase} />
     </Paper>

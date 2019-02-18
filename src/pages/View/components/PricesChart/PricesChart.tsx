@@ -1,6 +1,7 @@
 import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import { PieChart } from "react-easy-chart";
+import { moneyFormat } from "src/helpers/moneyFormatter";
 import { IListItem } from "src/types";
 import * as styles from "./PricesChart.css";
 
@@ -46,7 +47,8 @@ export default class PricesChart extends React.Component<
   };
 
   public createTooltip = () => {
-    if (this.state.showToolTip) {
+    const { showToolTip } = this.state;
+    if (showToolTip) {
       const { top, left, key, value } = this.state;
       return (
         <div
@@ -56,7 +58,9 @@ export default class PricesChart extends React.Component<
             left: `${left + 10}px`
           }}
         >
-          <Typography variant="caption">{`${key}: ${value}`}</Typography>
+          <Typography variant="caption">{`${key} - ${moneyFormat(
+            value
+          )}`}</Typography>
         </div>
       );
     }
@@ -75,7 +79,7 @@ export default class PricesChart extends React.Component<
       <React.Fragment>
         {this.createTooltip()}
         <Typography variant="caption" gutterBottom={true}>
-          Красивая диаграмка:
+          Красивая (вроде) диаграмка:
         </Typography>
         <div className={styles.chart}>
           <PieChart
