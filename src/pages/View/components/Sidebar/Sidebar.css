@@ -1,14 +1,15 @@
 :local(.sidebar) {
   width: 35%;
-  margin: 10px 10px 10px 0;
-  padding: 10px;
+  min-width: 350px;
+  padding: 10px 10px 10px 0;
 }
 
-:local(.tags) {
-  margin-bottom: 10px;
+:local(.sidebar > div) {
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 5px;
 }
 
 :local(.tags > div) {
   margin-right: 5px;
-  margin-bottom: 5px;
+  margin-top: 5px;
 }

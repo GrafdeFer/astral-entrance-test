@@ -37,14 +37,18 @@ const Sidebar: React.FunctionComponent<ISidebarProps> = props => {
   );
 
   return (
-    <Paper className={styles.sidebar}>
-      <Typography variant="caption" gutterBottom={true}>
-        Выберите теги:
-      </Typography>
-      <div className={styles.tags}>{pickedTags}</div>
-      <div className={styles.tags}>{allTags}</div>
-      <PricesChart items={items} />
-    </Paper>
+    <div className={styles.sidebar}>
+      <Paper>
+        <Typography variant="caption" gutterBottom={true}>
+          Выберите теги:
+        </Typography>
+        <div className={styles.tags}>{pickedTags}</div>
+        <div className={styles.tags}>{allTags}</div>
+      </Paper>
+      <Paper>
+        <PricesChart items={items} />
+      </Paper>
+    </div>
   );
 };
 

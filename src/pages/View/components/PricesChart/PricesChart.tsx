@@ -1,3 +1,4 @@
+import Typography from "@material-ui/core/Typography";
 import * as React from "react";
 import { PieChart } from "react-easy-chart";
 import { IListItem } from "src/types";
@@ -49,13 +50,13 @@ export default class PricesChart extends React.Component<
       const { top, left, key, value } = this.state;
       return (
         <div
+          className={styles.tooltip}
           style={{
-            position: "absolute",
             top: `${top + 10}px`,
             left: `${left + 10}px`
           }}
         >
-          {`${key}: ${value}`}
+          <Typography variant="caption">{`${key}: ${value}`}</Typography>
         </div>
       );
     }
@@ -71,15 +72,20 @@ export default class PricesChart extends React.Component<
     }));
 
     return (
-      <div className={styles.chart}>
+      <React.Fragment>
         {this.createTooltip()}
-        <PieChart
-          size={300}
-          data={data}
-          mouseOverHandler={this.onMouseOver}
-          mouseOutHandler={this.onMouseOut}
-        />
-      </div>
+        <Typography variant="caption" gutterBottom={true}>
+          Красивая диаграмка:
+        </Typography>
+        <div className={styles.chart}>
+          <PieChart
+            size={300}
+            data={data}
+            mouseOverHandler={this.onMouseOver}
+            mouseOutHandler={this.onMouseOut}
+          />
+        </div>
+      </React.Fragment>
     );
   }
 }
